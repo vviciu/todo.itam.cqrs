@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using todo.item.model.Data;
 using MediatR;
+using FluentValidation.AspNetCore;
 
 namespace todo.item.main
 {
@@ -34,6 +35,8 @@ namespace todo.item.main
                     options.UseSqlServer(Configuration.GetConnectionString("DBContext")));
 
             services.AddMediatR(typeof(Startup).Assembly);
+
+            services.AddMvc().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
         }
 
 
